@@ -1,9 +1,9 @@
 services:
   model:
-    image: "ghcr.io/remla22-group3/stackoverflow-tag-detection:0.0.1"
+    image: "ghcr.io/remla22-group3/stackoverflow-tag-detection:0.0.3"
 
   web:
-    image: "ghcr.io/remla22-group3/stackoverflow-web-app:0.0.1"
+    image: "ghcr.io/remla22-group3/stackoverflow-web-app:0.0.2"
     ports:
      - "8080:8080"
     environment:
