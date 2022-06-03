@@ -49,7 +49,7 @@ spec:
     spec:
       containers:
       - name: so-web
-        image: ghcr.io/remla22-group3/stackoverflow-web-app:0.0.2
+        image: ghcr.io/remla22-group3/stackoverflow-web-app:0.0.3
         ports:
         - containerPort: 8080
         env:
