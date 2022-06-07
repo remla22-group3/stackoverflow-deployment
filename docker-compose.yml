@@ -1,10 +1,13 @@
 services:
-  model:
-    image: "ghcr.io/remla22-group3/stackoverflow-tag-detection:0.0.3"
+  model_release:
+    image: "ghcr.io/remla22-group3/stackoverflow-tag-detection:0.0.4"
+  model_shadow:
+    image: "ghcr.io/remla22-group3/stackoverflow-tag-detection:0.0.4"
 
   web:
-    image: "ghcr.io/remla22-group3/stackoverflow-web-app:0.0.3"
+    image: "ghcr.io/remla22-group3/stackoverflow-web-app:0.0.4"
     ports:
      - "8080:8080"
     environment:
-     - MODEL_HOST=http://model:8080
+     - RELEASE_HOST=http://model_release:8080
+     - SHADOW_HOST=http://model_shadow:8080

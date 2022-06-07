@@ -1,32 +1,65 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: so-model-depl
+  name: so-model-release-depl
   labels:
-    app: so-model
+    app: so-model-release
 spec:
   replicas: 2
   selector:
     matchLabels:
-      app: so-model
+      app: so-model-release
   template:
     metadata:
       labels:
-        app: so-model
+        app: so-model-release
     spec:
       containers:
-      - name: so-model
-        image: ghcr.io/remla22-group3/stackoverflow-tag-detection:0.0.3
+      - name: so-model-release
+        image: ghcr.io/remla22-group3/stackoverflow-tag-detection:0.0.4
         ports:
         - containerPort: 8080
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: so-model-svc
+  name: so-model-release-svc
 spec:
   selector:
-    app: so-model
+    app: so-model-release
+  ports:
+    - port: 8080
+      targetPort: 8080
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: so-model-shadow-depl
+  labels:
+    app: so-model-shadow
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: so-model-shadow
+  template:
+    metadata:
+      labels:
+        app: so-model-shadow
+    spec:
+      containers:
+      - name: so-model-shadow
+        image: ghcr.io/remla22-group3/stackoverflow-tag-detection:0.0.4
+        ports:
+        - containerPort: 8080
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: so-model-shadow-svc
+spec:
+  selector:
+    app: so-model-shadow
   ports:
     - port: 8080
       targetPort: 8080
@@ -49,15 +82,20 @@ spec:
     spec:
       containers:
       - name: so-web
-        image: ghcr.io/remla22-group3/stackoverflow-web-app:0.0.3
+        image: ghcr.io/remla22-group3/stackoverflow-web-app:0.0.4
         ports:
         - containerPort: 8080
         env:
-          - name: MODEL_HOST
+          - name: RELEASE_HOST
             valueFrom:
               configMapKeyRef:
                 name: my-config
-                key: model.host
+                key: model_release.host
+          - name: SHADOW_HOST
+            valueFrom:
+              configMapKeyRef:
+                name: my-config
+                key: model_shadow.host
 ---
 apiVersion: v1
 kind: Service
@@ -103,4 +141,5 @@ kind: ConfigMap
 metadata:
   name: my-config
 data:
-  model.host: "http://so-model-svc:8080"
+  model_release.host: "http://so-model-release-svc:8080"
+  model_shadow.host: "http://so-model-shadow-svc:8080"
