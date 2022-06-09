@@ -49,7 +49,7 @@ spec:
     spec:
       containers:
       - name: so-model-shadow
-        image: ghcr.io/remla22-group3/stackoverflow-tag-detection:0.0.4
+        image: ghcr.io/remla22-group3/stackoverflow-tag-detection:0.0.5
         ports:
         - containerPort: 8080
 ---
