@@ -21,15 +21,14 @@
       }
     ]
   },
-  "editable": true,
+  "editable": false,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
-  "id": 27,
+  "id": 32,
   "links": [],
   "liveNow": false,
   "panels": [
     {
-      "collapsed": false,
       "gridPos": {
         "h": 1,
         "w": 24,
@@ -37,7 +36,6 @@
         "y": 0
       },
       "id": 2,
-      "panels": [],
       "title": "General Activity",
       "type": "row"
     },
@@ -124,10 +122,10 @@
           "expr": "rate(nr_suggestions{}[$__rate_interval])",
           "legendFormat": "Web App Instance",
           "range": true,
-          "refId": "Total Suggestions"
+          "refId": "Suggestions"
         }
       ],
-      "title": "Rate of Change for  Total Number of Suggestions",
+      "title": "Rate of Change for Total Number of Suggestions",
       "type": "timeseries"
     },
     {
@@ -213,7 +211,7 @@
           "expr": "rate(nr_submissions{}[$__rate_interval])",
           "legendFormat": "Web App Instance",
           "range": true,
-          "refId": "Total Submissions"
+          "refId": "Submissions"
         }
       ],
       "title": "Rate of Change for Total Number of Submissions",
@@ -288,32 +286,7 @@
             ]
           }
         },
-        "overrides": [
-          {
-            "__systemRef": "hideSeriesFrom",
-            "matcher": {
-              "id": "byNames",
-              "options": {
-                "mode": "exclude",
-                "names": [
-                  "{container=\"so-web\", endpoint=\"8080\", instance=\"172.17.0.13:8080\", job=\"so-web-svc\", namespace=\"default\", pod=\"so-web-depl-6948bc6557-bc9hf\", service=\"so-web-svc\"}"
-                ],
-                "prefix": "All except:",
-                "readOnly": true
-              }
-            },
-            "properties": [
-              {
-                "id": "custom.hideFrom",
-                "value": {
-                  "legend": false,
-                  "tooltip": false,
-                  "viz": true
-                }
-              }
-            ]
-          }
-        ]
+        "overrides": []
       },
       "gridPos": {
         "h": 8,
@@ -341,10 +314,9 @@
           },
           "editorMode": "code",
           "expr": "release_agg_share_chosen_tags{}/nr_submissions{}",
-          "hide": false,
           "legendFormat": "Release Model Instance",
           "range": true,
-          "refId": "Release Share"
+          "refId": "Release"
         },
         {
           "datasource": {
@@ -356,7 +328,7 @@
           "hide": false,
           "legendFormat": "Shadow Model Instance",
           "range": true,
-          "refId": "Shadow Share"
+          "refId": "Shadow"
         }
       ],
       "title": "Share of Selected Tags from Predictions",
@@ -426,7 +398,7 @@
         "x": 8,
         "y": 10
       },
-      "id": 11,
+      "id": 12,
       "options": {
         "legend": {
           "calcs": [],
@@ -446,10 +418,9 @@
           },
           "editorMode": "code",
           "expr": "release_agg_share_manual_tags{}/nr_submissions{}",
-          "hide": false,
           "legendFormat": "Release Model Instance",
           "range": true,
-          "refId": "Release Share"
+          "refId": "Release"
         },
         {
           "datasource": {
@@ -461,11 +432,10 @@
           "hide": false,
           "legendFormat": "Shadow Model Instance",
           "range": true,
-          "refId": "Shadow Share"
+          "refId": "Shadow"
         }
       ],
       "title": "Share of Manually Added Tags",
-      "transformations": [],
       "type": "timeseries"
     },
     {
@@ -532,7 +502,7 @@
         "x": 16,
         "y": 10
       },
-      "id": 12,
+      "id": 14,
       "options": {
         "legend": {
           "calcs": [],
@@ -552,10 +522,9 @@
           },
           "editorMode": "code",
           "expr": "release_agg_share_new_tags{}/nr_submissions{}",
-          "hide": false,
           "legendFormat": "Release Model Instance",
           "range": true,
-          "refId": "Release Share"
+          "refId": "Release"
         },
         {
           "datasource": {
@@ -567,11 +536,10 @@
           "hide": false,
           "legendFormat": "Shadow Model Instance",
           "range": true,
-          "refId": "Shadow Share"
+          "refId": "Shadow"
         }
       ],
       "title": "Share of Newly Added Tags",
-      "transformations": [],
       "type": "timeseries"
     }
   ],
@@ -589,7 +557,7 @@
   "timepicker": {},
   "timezone": "",
   "title": "REMLA22 Group3",
-  "uid": "EFP1biCnz",
+  "uid": "qZm8-Dj7k",
   "version": 1,
   "weekStart": ""
 }
