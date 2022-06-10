@@ -35,4 +35,4 @@ An export of the group's dashboard has been provided through the file `graphana_
 
 #### An ingress is provided in Kubernetes for accessing the web application.
 
-***Note***: If you are running Kubernetes locally through `minikube`, you will first need to enable the Ingress controller by executing: `minikube addons enable ingress`. Furthermore, if you are also using the `docker` driver, you will need to run `minikube service so-web-svc --url` or `kubectl port-forward service/so-web-svc 8080:8080` to have it accessible at http://localhost:8080/.
+***Note***: If you are running Kubernetes locally through `minikube`, you will first need to enable the Ingress controller by executing: `minikube addons enable ingress`. Furthermore, if you are also using the `docker` driver, you will need to run `minikube tunnel` to have it accessible at http://localhost/.
