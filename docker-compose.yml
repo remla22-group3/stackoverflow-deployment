@@ -3,11 +3,18 @@ services:
     image: "ghcr.io/remla22-group3/stackoverflow-tag-detection:0.0.4"
   model_shadow:
     image: "ghcr.io/remla22-group3/stackoverflow-tag-detection:0.0.4"
+  mongo:
+    image: mongo
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: example
 
   web:
-    image: "ghcr.io/remla22-group3/stackoverflow-web-app:0.0.4"
+    image: "ghcr.io/remla22-group3/stackoverflow-web-app:0.0.6"
     ports:
      - "8080:8080"
     environment:
      - RELEASE_HOST=http://model_release:8080
      - SHADOW_HOST=http://model_shadow:8080
+     - MONGO_HOST=mongo:27017
+     - MONGO_ROOT_PASS=example

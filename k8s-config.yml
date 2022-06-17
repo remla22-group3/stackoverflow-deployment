@@ -82,7 +82,7 @@ spec:
     spec:
       containers:
       - name: so-web
-        image: ghcr.io/remla22-group3/stackoverflow-web-app:0.0.5
+        image: ghcr.io/remla22-group3/stackoverflow-web-app:0.0.6
         ports:
         - containerPort: 8080
         env:
@@ -96,6 +96,16 @@ spec:
               configMapKeyRef:
                 name: my-config
                 key: model_shadow.host
+          - name: MONGO_HOST
+            valueFrom:
+              configMapKeyRef:
+                name: my-config
+                key: mongo.host
+          - name: MONGO_ROOT_PASS
+            valueFrom:
+              secretKeyRef:
+                name: mongo-mongodb
+                key: mongodb-root-password
 ---
 apiVersion: v1
 kind: Service
@@ -143,3 +153,4 @@ metadata:
 data:
   model_release.host: "http://so-model-release-svc:8080"
   model_shadow.host: "http://so-model-shadow-svc:8080"
+  mongo.host: "mongo-mongodb:27017"
